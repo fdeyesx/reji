@@ -1,0 +1,111 @@
+#include <iostream>
+using namespace std;
+
+struct movie {
+    string title;
+    int timing;
+    int year;
+    string director;
+};
+
+void input_m(movie &m){
+    cout << "Enter the name of film: ";
+    cin >> m.title;
+    cout << "Enter duration of film in minutes: ";
+    cin >> m.timing;
+    cout << "Enter the year of film: ";
+    cin >> m.year;
+    cout << "Enter name of director: ";
+    cin >> m.director;
+}
+
+void movies_input(movie *movies, int k)
+{
+    for (int i = 0; i < k; i++)
+    {
+        input_m(movies[i]);
+    }
+}
+
+void output_m(movie *movies){
+    cout << "Enter number of film you need: ";
+    int n;
+    cin >> n;
+    cout << "Film called " << movies[n].title << " has duration of time, exactly, it's " << movies[n].timing << " it was published in " << movies[n].year << " and director of film is " << movies[n].director << endl;
+}
+
+int count(movie *movies, int k){
+    int sum;
+    for (int i = 0; i < k; i++)
+    {
+        sum += movies[i].timing;
+    }
+    int b = sum / k;
+    cout << "Summary timing of films is " << b << endl;
+    return b ;
+}
+
+int info(movie *movies, int k){
+    cout << "Enter the year after its some films were appeared: ";
+    int ayear;
+    cin >> ayear;
+    int sum = 0;
+    for (int i = 0; i < k; i++){
+        if (movies[i].year > ayear){
+            int a = 1;
+            sum += a;}      
+    }
+    cout << sum << " film(-s) was(were) published after " << ayear << endl;
+    return 0;
+}
+
+int duration(movie *movies, int k){
+    int sum;
+    for (int i = 0; i < k; i++)
+    {
+        sum += movies[i].timing;
+    }
+    int b = sum / k;
+    int sumsec = 0;
+    for (int i = 0; i > b; i++){
+        if (movies[i].timing > b){
+            int a = 1;
+            sumsec += a;}      
+    }
+    cout << sum << " film(-s) has(-ve) duration  more than average time." << endl;
+    return 0;
+}
+
+string operations(movie *movies, int k){
+    cout << "Enter operation u need: ";
+    char operation;
+    cin >> operation;
+    switch(operation){
+        case 'o':
+          output_m(movies);
+          break;
+        case 'c':
+          count(movies, k);
+          break;
+        case 'i':
+          info(movies, k);
+          break;
+        case 'd':
+          duration(movies, k);
+          break;
+    }
+    return 0;
+}
+
+int main(){
+    cout << "Enter number of films u'll write soon: ";
+    int k;
+    cin >> k;
+
+    movie *movies = new movie[k];
+
+    movies_input(movies, k);
+    operations(movies, k);
+
+    return 0;
+}
